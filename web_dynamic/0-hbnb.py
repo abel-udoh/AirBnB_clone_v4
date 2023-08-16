@@ -7,6 +7,8 @@ from models.state import State
 from models.amenity import Amenity
 from models.place import Place
 from flask import Flask, render_template
+import uuid
+
 app = Flask(__name__)
 
 
@@ -19,8 +21,9 @@ def hbnb_filters():
     amenities = storage.all(Amenity)
     places = storage.all(Place)
     return render_template(path, states=states,
-                           amenities=amenities,
-                           places=places)
+                            amenities=amenities,
+                            places=places)
+                            cache_id=uuid.uuid4())
 
 
 @app.teardown_appcontext
